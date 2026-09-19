@@ -6,8 +6,8 @@ import joblib
 st.set_page_config(page_title="Diabetes Prediction", layout="centered")
 
 # Load model and scaler
-model = joblib.load("models/xgboost.pkl")
-scaler = joblib.load("models/scaler.pkl")
+model = joblib.load("xgboost.pkl")
+scaler = joblib.load("scaler.pkl")
 
 # Sidebar navigation
 page = st.sidebar.radio("Navigation", ["🏠 Home", "🧪 Prediction"])

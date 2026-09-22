@@ -15,6 +15,7 @@ scaler = joblib.load("scaler.pkl")
 page = st.sidebar.radio("Navegación", ["🏠 Inicio", "🧪 Predicción"])
 
 if page == "🏠 Inicio":
+  st.title("🩺 Curso : Despliegue WEB")
   st.title("🩺 Predicción de Diabetes")
   st.write(
       """

@@ -81,13 +81,28 @@ elif page == "🧪 Prediction":
             Xnew = pd.DataFrame([patient])
             Xnew_scaled = scaler.transform(Xnew)
 
-            # Prediction
-            pred = model.predict(Xnew_scaled)[0]
+# Prediction
+pred = model.predict(Xnew_scaled)[0]
 
-            # Display result
-            st.markdown("---")
-            st.subheader("📝 Prediction Result")
-            if pred == 1:
-                st.error("🔴 Diabetic")
-            else:
-                st.success("🟢 Non-Diabetic")
+# Probability
+probabilities = model.predict_proba(Xnew_scaled)[0]
+
+# Probability of diabetes (class 1)
+prob_diabetic = probabilities[1]
+
+# Display result
+st.markdown("---")
+st.subheader("📝 Prediction Result")
+
+if pred == 1:
+    st.error("🔴 Diabetic")
+    st.metric(
+        label="Probability of Diabetes",
+        value=f"{prob_diabetic:.2%}"
+    )
+else:
+    st.success("🟢 Non-Diabetic")
+    st.metric(
+        label="Probability of Diabetes",
+        value=f"{prob_diabetic:.2%}"
+    )

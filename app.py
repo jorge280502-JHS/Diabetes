@@ -85,13 +85,10 @@ elif page == "🧪 Prediction":
       Xnew = pd.DataFrame([patient])
       Xnew_scaled = scaler.transform(Xnew)
 
-      # Prediction
       pred = model.predict(Xnew_scaled)[0]
-
-      # Probability
       probabilities = model.predict_proba(Xnew_scaled)[0]
 
-      # Probability of diabetes (class 1)
+      prob_no_diabetic = probabilities[0]
       prob_diabetic = probabilities[1]
 
       # Display result
@@ -100,11 +97,10 @@ elif page == "🧪 Prediction":
 
       if pred == 1:
         st.error("🔴 Diabetic")
-        st.metric(
-            label="Probability of Diabetes", value=f"{prob_diabetic:.2%}"
-        )
       else:
         st.success("🟢 Non-Diabetic")
-        st.metric(
-            label="Probability of Diabetes", value=f"{prob_diabetic:.2%}"
-        )
+
+      st.write(
+          f"🟢 Probability of Non-Diabetes: **{prob_no_diabetic:.2%}**"
+      )
+      st.write(f"🔴 Probability of Diabetes: **{prob_diabetic:.2%}**")
